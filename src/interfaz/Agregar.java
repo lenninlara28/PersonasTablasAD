@@ -3,8 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package interfaz;
+
+import clases.Helper;
+import clases.Persona;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,9 +19,12 @@ public class Agregar extends javax.swing.JDialog {
     /**
      * Creates new form Agregar
      */
+    ArrayList<Persona> personas;
+
     public Agregar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        personas = new ArrayList();
     }
 
     /**
@@ -74,18 +81,33 @@ public class Agregar extends javax.swing.JDialog {
         cmdGuardar.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         cmdGuardar.setForeground(new java.awt.Color(255, 255, 255));
         cmdGuardar.setText("Guardar");
+        cmdGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdGuardarActionPerformed(evt);
+            }
+        });
         jPanel2.add(cmdGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 100, -1));
 
         cmdEliminar.setBackground(new java.awt.Color(0, 0, 0));
         cmdEliminar.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         cmdEliminar.setForeground(new java.awt.Color(255, 255, 255));
         cmdEliminar.setText("Eliminar");
+        cmdEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdEliminarActionPerformed(evt);
+            }
+        });
         jPanel2.add(cmdEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 100, -1));
 
         cmdLimpiar.setBackground(new java.awt.Color(0, 0, 0));
         cmdLimpiar.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         cmdLimpiar.setForeground(new java.awt.Color(255, 255, 255));
         cmdLimpiar.setText("Limpiar");
+        cmdLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdLimpiarActionPerformed(evt);
+            }
+        });
         jPanel2.add(cmdLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 100, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, 140, 150));
@@ -109,6 +131,11 @@ public class Agregar extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
+        tblTablaPersonas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblTablaPersonasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblTablaPersonas);
 
         jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 430, 210));
@@ -129,6 +156,56 @@ public class Agregar extends javax.swing.JDialog {
         setSize(new java.awt.Dimension(604, 523));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cmdGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdGuardarActionPerformed
+        String cedula, nombre, apellido;
+        cedula = txtCedula1.getText();
+        nombre = txtNombre1.getText();
+        apellido = txtApellido1.getText();
+
+        Persona p = new Persona(cedula, nombre, apellido);
+        personas.add(p);
+
+        Helper.llenarTabla(tblTablaPersonas, personas);
+
+        txtCedula1.setText("");
+        txtApellido1.setText("");
+        txtNombre1.setText("");
+        txtCedula1.requestFocusInWindow();
+    }//GEN-LAST:event_cmdGuardarActionPerformed
+
+    private void cmdLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLimpiarActionPerformed
+        txtCedula1.setText("");
+        txtApellido1.setText("");
+        txtNombre1.setText("");
+        txtCedula1.requestFocusInWindow();
+    }//GEN-LAST:event_cmdLimpiarActionPerformed
+
+    private void tblTablaPersonasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTablaPersonasMouseClicked
+        int i;
+        Persona p;
+        i = tblTablaPersonas.getSelectedRow();
+        p = personas.get(i);
+        txtCedula1.setText(p.getCedula());
+        txtNombre1.setText(p.getNombre());
+        txtApellido1.setText(p.getApellido());
+    }//GEN-LAST:event_tblTablaPersonasMouseClicked
+
+    private void cmdEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEliminarActionPerformed
+        int i, op;
+        op = JOptionPane.showConfirmDialog(this, "¿Seguro Que Desea Eliminar A Esta Personas", "Eliminar", JOptionPane.YES_NO_OPTION);
+        if (op == JOptionPane.YES_OPTION) {
+            i = tblTablaPersonas.getSelectedRow();
+            personas.remove(i);
+            Helper.llenarTabla(tblTablaPersonas, personas);
+            txtCedula1.setText("");
+            txtApellido1.setText("");
+            txtNombre1.setText("");
+            txtCedula1.requestFocusInWindow();
+        } else {
+
+        }
+    }//GEN-LAST:event_cmdEliminarActionPerformed
 
     /**
      * @param args the command line arguments
