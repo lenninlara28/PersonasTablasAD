@@ -7,6 +7,7 @@ package interfaz;
 
 import clases.Helper;
 import clases.Persona;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -27,17 +28,18 @@ public class Agregar extends javax.swing.JDialog {
     String ruta;
     ObjectOutputStream salida;
     ArrayList<Persona> personas;
-
+    
     public Agregar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         ruta = "src/datos/personas.txt";
         try {
-            //personas = new ArrayList();
+            personas = Helper.traerDatos(ruta);
             salida = new ObjectOutputStream(new FileOutputStream(ruta));
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
+        Helper.volcado(salida, personas);
         Helper.llenarTabla(tblTablaPersonas, ruta);
     }
 
@@ -176,16 +178,16 @@ public class Agregar extends javax.swing.JDialog {
         cedula = txtCedula1.getText();
         nombre = txtNombre1.getText();
         apellido = txtApellido1.getText();
-
+        
         Persona p = new Persona(cedula, nombre, apellido);
         try {
             p.guardar(salida);
         } catch (IOException ex) {
-            Logger.getLogger(Agregar.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         }
-
+        
         Helper.llenarTabla(tblTablaPersonas, ruta);
-
+        
         txtCedula1.setText("");
         txtApellido1.setText("");
         txtNombre1.setText("");
@@ -202,6 +204,7 @@ public class Agregar extends javax.swing.JDialog {
     private void tblTablaPersonasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTablaPersonasMouseClicked
         int i;
         Persona p;
+        ArrayList<Persona> personas = Helper.traerDatos(ruta);
         i = tblTablaPersonas.getSelectedRow();
         p = personas.get(i);
         txtCedula1.setText(p.getCedula());
@@ -212,16 +215,25 @@ public class Agregar extends javax.swing.JDialog {
     private void cmdEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEliminarActionPerformed
         int i, op;
         op = JOptionPane.showConfirmDialog(this, "¿Seguro Que Desea Eliminar A Esta Personas", "Eliminar", JOptionPane.YES_NO_OPTION);
+        ArrayList<Persona> personas = Helper.traerDatos(ruta);
         if (op == JOptionPane.YES_OPTION) {
             i = tblTablaPersonas.getSelectedRow();
             personas.remove(i);
+            try {
+                salida = new ObjectOutputStream(new FileOutputStream(ruta));
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(Agregar.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Agregar.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Helper.volcado(salida, personas);
             Helper.llenarTabla(tblTablaPersonas, ruta);
             txtCedula1.setText("");
             txtApellido1.setText("");
             txtNombre1.setText("");
             txtCedula1.requestFocusInWindow();
         } else {
-
+            
         }
     }//GEN-LAST:event_cmdEliminarActionPerformed
 
