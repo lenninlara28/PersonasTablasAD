@@ -73,9 +73,10 @@ public class Helper {
         }
     }
 
-    public static void llenarTabla(JTable tabla, ArrayList<Persona> personas) {
+    public static void llenarTabla(JTable tabla, String ruta) {
         DefaultTableModel tm;
         int nf;
+        ArrayList<Persona> personas = traerDatos(ruta);
         tm = (DefaultTableModel) tabla.getModel();
         limpiadoTabla(tabla);
         nf = personas.size();
@@ -88,7 +89,8 @@ public class Helper {
         }
 
     }
-    public static ArrayList traerDatos(String ruta){
+
+    public static ArrayList traerDatos(String ruta) {
         FileInputStream archivo;
         ObjectInputStream entrada;
         ArrayList persona = new ArrayList();
@@ -96,7 +98,7 @@ public class Helper {
         try {
             archivo = new FileInputStream(ruta);
             entrada = new ObjectInputStream(archivo);
-            while ((p=entrada.readObject())!=null){
+            while ((p = entrada.readObject()) != null) {
                 persona.add(p);
             }
         } catch (FileNotFoundException ex) {
@@ -107,8 +109,7 @@ public class Helper {
             System.out.println(ex.getMessage());
         }
         return persona;
-        
-        
+
     }
 
 }
