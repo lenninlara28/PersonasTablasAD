@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package interfaz;
+
+import clases.Helper;
 
 /**
  *
@@ -14,9 +15,11 @@ public class Principal extends javax.swing.JFrame {
 
     /**
      * Creates new form Principal
-     */
+     */String ruta;
+                
     public Principal() {
         initComponents();
+        ruta = "src/datos/personas.txt";
     }
 
     /**
@@ -28,14 +31,20 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem3 = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         lblImagen = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         mnOpciones = new javax.swing.JMenu();
         mnAgregar = new javax.swing.JMenuItem();
-        mnReportes = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        mnListadoPorSexo = new javax.swing.JMenuItem();
+        mnListadoCompleto = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         mnSalir = new javax.swing.JMenuItem();
+
+        jMenuItem3.setText("jMenuItem3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PERSONAS");
@@ -57,8 +66,33 @@ public class Principal extends javax.swing.JFrame {
         });
         mnOpciones.add(mnAgregar);
 
-        mnReportes.setText("Reportes");
-        mnOpciones.add(mnReportes);
+        jMenu1.setText("Reportes");
+
+        jMenuItem1.setText("Listar Por Sexo");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        mnListadoPorSexo.setText("CantidadDePersonas Agregadas");
+        mnListadoPorSexo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnListadoPorSexoActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnListadoPorSexo);
+
+        mnListadoCompleto.setText("Listado Completo");
+        mnListadoCompleto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnListadoCompletoActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnListadoCompleto);
+
+        mnOpciones.add(jMenu1);
         mnOpciones.add(jSeparator1);
 
         mnSalir.setText("Salir");
@@ -95,13 +129,29 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAgregarActionPerformed
-        Agregar a = new Agregar(this,true);
+        Agregar a = new Agregar(this, true);
         a.setVisible(true);
     }//GEN-LAST:event_mnAgregarActionPerformed
 
     private void mnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnSalirActionPerformed
         System.exit(0);
     }//GEN-LAST:event_mnSalirActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        ListadoPorSexo a = new ListadoPorSexo(this, true);
+        a.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void mnListadoPorSexoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnListadoPorSexoActionPerformed
+        int cont;
+        cont = Helper.traerDatos(ruta).size();
+        Helper.mensaje(this, "El número de personas ingresadas es: " + cont, 1);
+    }//GEN-LAST:event_mnListadoPorSexoActionPerformed
+
+    private void mnListadoCompletoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnListadoCompletoActionPerformed
+        ListadoCompleto lc = new ListadoCompleto(this,true);
+        lc.setVisible(true);
+    }//GEN-LAST:event_mnListadoCompletoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -139,13 +189,17 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JLabel lblImagen;
     private javax.swing.JMenuItem mnAgregar;
+    private javax.swing.JMenuItem mnListadoCompleto;
+    private javax.swing.JMenuItem mnListadoPorSexo;
     private javax.swing.JMenu mnOpciones;
-    private javax.swing.JMenuItem mnReportes;
     private javax.swing.JMenuItem mnSalir;
     // End of variables declaration//GEN-END:variables
 }
