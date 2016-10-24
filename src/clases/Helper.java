@@ -87,6 +87,7 @@ public class Helper {
             tabla.setValueAt(personas.get(i).getCedula(), i, 1);
             tabla.setValueAt(personas.get(i).getNombre(), i, 2);
             tabla.setValueAt(personas.get(i).getApellido(), i, 3);
+             tabla.setValueAt(personas.get(i).getSexo(), i, 4);
         }
 
     }
