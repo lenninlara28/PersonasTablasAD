@@ -34,6 +34,10 @@ public class Agregar extends javax.swing.JDialog {
     public Agregar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        JButton botonesH[] = {cmdBuscar, cmdCancelar};
+        JButton botonesD[] = {cmdGuardar, cmdEliminar};
+        Helper.habilitarBotones(botonesH);
+        Helper.deshabilitarBotones(botonesD);
         ruta = "src/datos/personas.txt";
         try {
             personas = Helper.traerDatos(ruta);
