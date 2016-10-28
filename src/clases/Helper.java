@@ -87,7 +87,7 @@ public class Helper {
             tabla.setValueAt(personas.get(i).getCedula(), i, 1);
             tabla.setValueAt(personas.get(i).getNombre(), i, 2);
             tabla.setValueAt(personas.get(i).getApellido(), i, 3);
-             tabla.setValueAt(personas.get(i).getSexo(), i, 4);
+            tabla.setValueAt(personas.get(i).getSexo(), i, 4);
         }
 
     }
@@ -150,6 +150,40 @@ public class Helper {
         }
         llenarTabla(tabla, personasFiltradas);
 
+    }
+
+    public static boolean busacarPersonaCedula(String cedula, String ruta) {
+        ArrayList<Persona> personas = traerDatos(ruta);
+        for (int i = 0; i < personas.size(); i++) {
+            if (personas.get(i).getCedula().equals(cedula)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static Persona traerPersonaCedula(String cedula, String ruta) {
+        ArrayList<Persona> personas = traerDatos(ruta);
+        for (int i = 0; i < personas.size(); i++) {
+            if (personas.get(i).getCedula().equals(cedula)) {
+                return personas.get(i);
+            }
+        }
+        return null;
+    }
+
+    public static ArrayList<Persona> modificarPersona(String ruta, String cedula, String nombre, String apellido, String sexo) {
+        ArrayList<Persona> personas = traerDatos(ruta);
+        for (int i = 0; i < personas.size(); i++) {
+            if (personas.get(i).getCedula().equals(cedula)) {
+                personas.get(i).setNombre(nombre);
+                personas.get(i).setApellido(apellido);
+                personas.get(i).setSexo(sexo);
+
+                return personas;
+            }
+        }
+        return null;
     }
 
 }

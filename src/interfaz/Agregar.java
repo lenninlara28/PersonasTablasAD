@@ -28,6 +28,7 @@ public class Agregar extends javax.swing.JDialog {
     String ruta;
     ObjectOutputStream salida;
     ArrayList<Persona> personas;
+    int aux = 0;
 
     public Agregar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -55,18 +56,18 @@ public class Agregar extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        txtCedula1 = new javax.swing.JTextField();
+        txtCedula = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        txtNombre1 = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
         txtApellido = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         cmbSexo = new javax.swing.JComboBox();
         jPanel2 = new javax.swing.JPanel();
         cmdGuardar = new javax.swing.JButton();
         cmdEliminar = new javax.swing.JButton();
-        cmdLimpiar = new javax.swing.JButton();
-        cmdNuevo = new javax.swing.JButton();
+        cmdCancelar = new javax.swing.JButton();
+        cmdBuscar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblTablaPersonas = new javax.swing.JTable();
@@ -81,14 +82,14 @@ public class Agregar extends javax.swing.JDialog {
 
         jLabel4.setText("Nombre");
         jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
-        jPanel3.add(txtCedula1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 120, -1));
+        jPanel3.add(txtCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 120, -1));
 
         jLabel5.setText("Apellido");
         jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
 
         jLabel6.setText("Cedula");
         jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
-        jPanel3.add(txtNombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 120, -1));
+        jPanel3.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 120, -1));
         jPanel3.add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, 120, -1));
 
         jLabel7.setText("Sexo");
@@ -125,22 +126,27 @@ public class Agregar extends javax.swing.JDialog {
         });
         jPanel2.add(cmdEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 100, -1));
 
-        cmdLimpiar.setBackground(new java.awt.Color(0, 0, 0));
-        cmdLimpiar.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
-        cmdLimpiar.setForeground(new java.awt.Color(255, 255, 255));
-        cmdLimpiar.setText("Limpiar");
-        cmdLimpiar.addActionListener(new java.awt.event.ActionListener() {
+        cmdCancelar.setBackground(new java.awt.Color(0, 0, 0));
+        cmdCancelar.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        cmdCancelar.setForeground(new java.awt.Color(255, 255, 255));
+        cmdCancelar.setText("Cancelar");
+        cmdCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdLimpiarActionPerformed(evt);
+                cmdCancelarActionPerformed(evt);
             }
         });
-        jPanel2.add(cmdLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 100, -1));
+        jPanel2.add(cmdCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 100, -1));
 
-        cmdNuevo.setBackground(new java.awt.Color(0, 0, 0));
-        cmdNuevo.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
-        cmdNuevo.setForeground(new java.awt.Color(255, 255, 255));
-        cmdNuevo.setText("Nuevo");
-        jPanel2.add(cmdNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+        cmdBuscar.setBackground(new java.awt.Color(0, 0, 0));
+        cmdBuscar.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        cmdBuscar.setForeground(new java.awt.Color(255, 255, 255));
+        cmdBuscar.setText("Buscar");
+        cmdBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdBuscarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(cmdBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, 140, 190));
 
@@ -191,34 +197,45 @@ public class Agregar extends javax.swing.JDialog {
 
     private void cmdGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdGuardarActionPerformed
         String cedula, nombre, apellido, sexo;
-        cedula = txtCedula1.getText();
-        nombre = txtNombre1.getText();
+        cedula = txtCedula.getText();
+        nombre = txtNombre.getText();
         apellido = txtApellido.getText();
         sexo = cmbSexo.getSelectedItem().toString();
-
-        Persona p = new Persona(cedula, nombre, apellido, sexo);
+        ArrayList<Persona> personasModificado;
         try {
-            p.guardar(salida);
+            if (aux == 0) {
+
+                Persona p = new Persona(cedula, nombre, apellido, sexo);
+
+                p.guardar(salida);
+
+            } else {
+                personasModificado = Helper.modificarPersona(ruta, cedula, nombre, apellido, sexo);
+                salida = new ObjectOutputStream(new FileOutputStream(ruta));
+                Helper.volcado(salida, personasModificado);
+                aux = 0;
+                Helper.mensaje(this, "Persona Actualizada Correctamente!", 1);
+            }
         } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+            Logger.getLogger(Agregar.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         Helper.llenarTabla(tblTablaPersonas, ruta);
 
-        txtCedula1.setText("");
+        txtCedula.setText("");
+        txtNombre.setText("");
         txtApellido.setText("");
-        txtNombre1.setText("");
         cmbSexo.setSelectedIndex(0);
-        txtCedula1.requestFocusInWindow();
+        txtCedula.requestFocusInWindow();
     }//GEN-LAST:event_cmdGuardarActionPerformed
 
-    private void cmdLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLimpiarActionPerformed
-        txtCedula1.setText("");
+    private void cmdCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCancelarActionPerformed
+        txtCedula.setText("");
         txtApellido.setText("");
-        txtNombre1.setText("");
+        txtNombre.setText("");
         cmbSexo.setSelectedIndex(0);
-        txtCedula1.requestFocusInWindow();
-    }//GEN-LAST:event_cmdLimpiarActionPerformed
+        txtCedula.requestFocusInWindow();
+    }//GEN-LAST:event_cmdCancelarActionPerformed
 
     private void tblTablaPersonasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTablaPersonasMouseClicked
         int i;
@@ -226,8 +243,8 @@ public class Agregar extends javax.swing.JDialog {
         ArrayList<Persona> personas = Helper.traerDatos(ruta);
         i = tblTablaPersonas.getSelectedRow();
         p = personas.get(i);
-        txtCedula1.setText(p.getCedula());
-        txtNombre1.setText(p.getNombre());
+        txtCedula.setText(p.getCedula());
+        txtNombre.setText(p.getNombre());
         txtApellido.setText(p.getApellido());
         cmbSexo.setSelectedItem(p.getSexo());
 
@@ -249,15 +266,31 @@ public class Agregar extends javax.swing.JDialog {
             }
             Helper.volcado(salida, personas);
             Helper.llenarTabla(tblTablaPersonas, ruta);
-            txtCedula1.setText("");
+            txtCedula.setText("");
             txtApellido.setText("");
-            txtNombre1.setText("");
+            txtNombre.setText("");
             cmbSexo.setSelectedIndex(0);
-            txtCedula1.requestFocusInWindow();
+            txtCedula.requestFocusInWindow();
         } else {
 
         }
     }//GEN-LAST:event_cmdEliminarActionPerformed
+
+    private void cmdBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBuscarActionPerformed
+        String cedula;
+        cedula = txtCedula.getText();
+        Persona p;
+        if (Helper.busacarPersonaCedula(cedula, ruta)) {
+            p = Helper.traerPersonaCedula(cedula, ruta);
+            txtNombre.setText(p.getNombre());
+            txtApellido.setText(p.getApellido());
+            cmbSexo.setSelectedItem(p.getSexo());
+            aux = 1;
+        } else {
+            txtNombre.requestFocusInWindow();
+            aux = 0;
+        }
+    }//GEN-LAST:event_cmdBuscarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -303,10 +336,10 @@ public class Agregar extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox cmbSexo;
+    private javax.swing.JButton cmdBuscar;
+    private javax.swing.JButton cmdCancelar;
     private javax.swing.JButton cmdEliminar;
     private javax.swing.JButton cmdGuardar;
-    private javax.swing.JButton cmdLimpiar;
-    private javax.swing.JButton cmdNuevo;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -318,7 +351,7 @@ public class Agregar extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblTablaPersonas;
     private javax.swing.JTextField txtApellido;
-    private javax.swing.JTextField txtCedula1;
-    private javax.swing.JTextField txtNombre1;
+    private javax.swing.JTextField txtCedula;
+    private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }
