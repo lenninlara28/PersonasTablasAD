@@ -14,6 +14,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 /**
@@ -221,6 +222,11 @@ public class Agregar extends javax.swing.JDialog {
         }
 
         Helper.llenarTabla(tblTablaPersonas, ruta);
+        JButton botonesH[] = {cmdBuscar, cmdCancelar};
+        JButton botonesD[] = {cmdEliminar, cmdGuardar};
+
+        Helper.habilitarBotones(botonesH);
+        Helper.deshabilitarBotones(botonesD);
 
         txtCedula.setText("");
         txtNombre.setText("");
@@ -235,6 +241,11 @@ public class Agregar extends javax.swing.JDialog {
         txtNombre.setText("");
         cmbSexo.setSelectedIndex(0);
         txtCedula.requestFocusInWindow();
+        JButton botonesH[] = {cmdBuscar, cmdCancelar};
+        JButton botonesD[] = {cmdEliminar, cmdGuardar};
+
+        Helper.habilitarBotones(botonesH);
+        Helper.deshabilitarBotones(botonesD);
     }//GEN-LAST:event_cmdCancelarActionPerformed
 
     private void tblTablaPersonasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTablaPersonasMouseClicked
@@ -247,6 +258,11 @@ public class Agregar extends javax.swing.JDialog {
         txtNombre.setText(p.getNombre());
         txtApellido.setText(p.getApellido());
         cmbSexo.setSelectedItem(p.getSexo());
+        JButton botonesH[] = {cmdEliminar, cmdGuardar, cmdCancelar};
+        JButton botonesD[] = {cmdBuscar};
+
+        Helper.habilitarBotones(botonesH);
+        Helper.deshabilitarBotones(botonesD);
 
     }//GEN-LAST:event_tblTablaPersonasMouseClicked
 
@@ -271,6 +287,11 @@ public class Agregar extends javax.swing.JDialog {
             txtNombre.setText("");
             cmbSexo.setSelectedIndex(0);
             txtCedula.requestFocusInWindow();
+            JButton botonesH[] = {cmdBuscar, cmdCancelar};
+            JButton botonesD[] = {cmdEliminar, cmdGuardar};
+
+            Helper.habilitarBotones(botonesH);
+            Helper.deshabilitarBotones(botonesD);
         } else {
 
         }
@@ -290,6 +311,10 @@ public class Agregar extends javax.swing.JDialog {
             txtNombre.requestFocusInWindow();
             aux = 0;
         }
+        JButton botonesH[] = {cmdGuardar, cmdCancelar, cmdEliminar};
+        JButton botonesD[] = {cmdBuscar};
+        Helper.habilitarBotones(botonesH);
+        Helper.deshabilitarBotones(botonesD);
     }//GEN-LAST:event_cmdBuscarActionPerformed
 
     /**
