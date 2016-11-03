@@ -3,23 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package interfaz;
 
 import clases.Helper;
 
 /**
  *
- * @author llara11
+ * @author rmorales1
  */
 public class Principal extends javax.swing.JFrame {
 
     /**
      * Creates new form Principal
-     */String ruta;
-                
+     */
+     String ruta;
     public Principal() {
         initComponents();
-        ruta = "src/datos/personas.txt";
+          ruta = "src/datos/personas.txt";
     }
 
     /**
@@ -31,20 +32,28 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenu1 = new javax.swing.JMenu();
         jPanel1 = new javax.swing.JPanel();
         lblImagen = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         mnOpciones = new javax.swing.JMenu();
-        mnAgregar = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        mnListadoPorSexo = new javax.swing.JMenuItem();
-        mnListadoCompleto = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         mnSalir = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        mnAgregarPersonas = new javax.swing.JMenuItem();
+        mnReportes = new javax.swing.JMenu();
+        mnListados = new javax.swing.JMenu();
+        mnListadoPersonas = new javax.swing.JMenuItem();
+        mnListadoPorSexo = new javax.swing.JMenuItem();
+        mnCantidades = new javax.swing.JMenu();
+        mnCantidadPersonasIngresadas = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        mnAgregarCarros = new javax.swing.JMenuItem();
 
-        jMenuItem3.setText("jMenuItem3");
+        jMenu2.setText("jMenu2");
+
+        jMenu1.setText("jMenu1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PERSONAS");
@@ -52,47 +61,9 @@ public class Principal extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/portada.jpg"))); // NOI18N
-        lblImagen.setText("jLabel1");
-        jPanel1.add(lblImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(-40, 0, 670, 380));
+        jPanel1.add(lblImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 14, 660, 370));
 
-        mnOpciones.setBackground(new java.awt.Color(255, 255, 255));
         mnOpciones.setText("Opciones");
-
-        mnAgregar.setText("Agregar");
-        mnAgregar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnAgregarActionPerformed(evt);
-            }
-        });
-        mnOpciones.add(mnAgregar);
-
-        jMenu1.setText("Reportes");
-
-        jMenuItem1.setText("Listar Por Sexo");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem1);
-
-        mnListadoPorSexo.setText("CantidadDePersonas Agregadas");
-        mnListadoPorSexo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnListadoPorSexoActionPerformed(evt);
-            }
-        });
-        jMenu1.add(mnListadoPorSexo);
-
-        mnListadoCompleto.setText("Listado Completo");
-        mnListadoCompleto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnListadoCompletoActionPerformed(evt);
-            }
-        });
-        jMenu1.add(mnListadoCompleto);
-
-        mnOpciones.add(jMenu1);
         mnOpciones.add(jSeparator1);
 
         mnSalir.setText("Salir");
@@ -105,53 +76,116 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(mnOpciones);
 
+        jMenu3.setText("Personas");
+
+        mnAgregarPersonas.setText("Agregar");
+        mnAgregarPersonas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnAgregarPersonasActionPerformed(evt);
+            }
+        });
+        jMenu3.add(mnAgregarPersonas);
+
+        mnReportes.setText("Reportes");
+
+        mnListados.setText("Listados");
+
+        mnListadoPersonas.setText("Listado de Personas");
+        mnListadoPersonas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnListadoPersonasActionPerformed(evt);
+            }
+        });
+        mnListados.add(mnListadoPersonas);
+
+        mnListadoPorSexo.setText("Listado por Sexo");
+        mnListadoPorSexo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnListadoPorSexoActionPerformed(evt);
+            }
+        });
+        mnListados.add(mnListadoPorSexo);
+
+        mnReportes.add(mnListados);
+
+        mnCantidades.setText("Cantidades");
+
+        mnCantidadPersonasIngresadas.setText("Cantidad de Personas Ingresadas");
+        mnCantidadPersonasIngresadas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnCantidadPersonasIngresadasActionPerformed(evt);
+            }
+        });
+        mnCantidades.add(mnCantidadPersonasIngresadas);
+
+        mnReportes.add(mnCantidades);
+
+        jMenu3.add(mnReportes);
+
+        jMenuBar1.add(jMenu3);
+
+        jMenu4.setText("Carros");
+
+        mnAgregarCarros.setText("Agregar");
+        mnAgregarCarros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnAgregarCarrosActionPerformed(evt);
+            }
+        });
+        jMenu4.add(mnAgregarCarros);
+
+        jMenuBar1.add(jMenu4);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 641, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 684, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 9, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(677, 463));
+        pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void mnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAgregarActionPerformed
-        Agregar a = new Agregar(this, true);
+    private void mnAgregarPersonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAgregarPersonasActionPerformed
+        Agregar a = new Agregar(this,true);
         a.setVisible(true);
-    }//GEN-LAST:event_mnAgregarActionPerformed
+    }//GEN-LAST:event_mnAgregarPersonasActionPerformed
 
     private void mnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnSalirActionPerformed
-        System.exit(0);
+     
+      System.exit(0);
     }//GEN-LAST:event_mnSalirActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        ListadoPorSexo a = new ListadoPorSexo(this, true);
-        a.setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
     private void mnListadoPorSexoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnListadoPorSexoActionPerformed
-        int cont;
-        cont = Helper.traerDatos(ruta).size();
-        Helper.mensaje(this, "El número de personas ingresadas es: " + cont, 1);
+       ListadoPorSexo lps = new ListadoPorSexo(this,true);
+       lps.setVisible(true);
     }//GEN-LAST:event_mnListadoPorSexoActionPerformed
 
-    private void mnListadoCompletoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnListadoCompletoActionPerformed
+    private void mnCantidadPersonasIngresadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCantidadPersonasIngresadasActionPerformed
+        int cont;
+        cont = Helper.traerDatos(ruta).size();
+        Helper.mensaje(this, "El número de personas ingresadas es: "+cont, 1);
+        
+    }//GEN-LAST:event_mnCantidadPersonasIngresadasActionPerformed
+
+    private void mnListadoPersonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnListadoPersonasActionPerformed
         ListadoCompleto lc = new ListadoCompleto(this,true);
         lc.setVisible(true);
-    }//GEN-LAST:event_mnListadoCompletoActionPerformed
+    }//GEN-LAST:event_mnListadoPersonasActionPerformed
+
+    private void mnAgregarCarrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAgregarCarrosActionPerformed
+        AgregarCarro ac = new AgregarCarro(this,true);
+        ac.setVisible(true);
+    }//GEN-LAST:event_mnAgregarCarrosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -179,6 +213,7 @@ public class Principal extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -190,16 +225,22 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JLabel lblImagen;
-    private javax.swing.JMenuItem mnAgregar;
-    private javax.swing.JMenuItem mnListadoCompleto;
+    private javax.swing.JMenuItem mnAgregarCarros;
+    private javax.swing.JMenuItem mnAgregarPersonas;
+    private javax.swing.JMenuItem mnCantidadPersonasIngresadas;
+    private javax.swing.JMenu mnCantidades;
+    private javax.swing.JMenuItem mnListadoPersonas;
     private javax.swing.JMenuItem mnListadoPorSexo;
+    private javax.swing.JMenu mnListados;
     private javax.swing.JMenu mnOpciones;
+    private javax.swing.JMenu mnReportes;
     private javax.swing.JMenuItem mnSalir;
     // End of variables declaration//GEN-END:variables
 }
